@@ -9,9 +9,14 @@
 </head>
 
 <body>
-  <vic-tooltip>Without text attr</vic-tooltip>
-  <vic-tooltip text="Text of the first tooltip">The first one</vic-tooltip>
-  <vic-tooltip text="Text of the second tooltip">The second one</vic-tooltip>
+  <template id="vic-tooltip-template">
+    <span>(**)</span>
+    <slot>Default slot content</slot>
+  </template>
+  <vic-tooltip></vic-tooltip><br>
+  <vic-tooltip>Without text attr</vic-tooltip><br>
+  <vic-tooltip text="Text of the first tooltip">The first one</vic-tooltip><br>
+  <vic-tooltip text="Text of the second tooltip">The second one</vic-tooltip><br>
 </body>
 
 </html>
