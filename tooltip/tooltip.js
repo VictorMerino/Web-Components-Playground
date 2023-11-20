@@ -12,9 +12,37 @@ class Tooltip extends HTMLElement {
           position: absolute;
           padding: 6px 10px
         }
+
+        :host {
+          background-color: #fbecec
+        }
+
+        :host(.green) {
+          background-color: #94fb94
+        }
+
+        :host-context(p.bold) {
+          font-weight: bold
+        }
+
+        ::slotted(span) {
+          background-color: orange;
+          /*
+            Slotted styles always can be overriden by the light-dom.
+            The user should always have the last word
+          */
+        }
+
+        .icon {
+          background-color: #73d1ef;
+          color: white;
+          padding: .25rem .35rem;
+          border-radius: 50%;
+          font-size: 12px
+        }
       </style>
-      <span>(**)</span>
-      <slot>Default slot content</slot>
+      <span class="icon">(*)</span>
+      <slot><span>Default slot content</span></slot>
     `;
   }
 
