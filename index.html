@@ -6,7 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web Components Course</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     :root {
+      --color-primary: #1d185e;
       --color-green: #94fb94;
     }
   </style>
@@ -17,7 +21,7 @@
 <body>
   <vic-tooltip></vic-tooltip><br>
   <vic-tooltip>Without text attr</vic-tooltip><br>
-  <vic-tooltip text="Text of the first tooltip"><span>Thi is highligthed because it's in a span</span></vic-tooltip><br>
+  <vic-tooltip text="Text of the first tooltip"><span>This is highligthed because it's in a span</span></vic-tooltip><br>
   <vic-tooltip text="Text of the second tooltip" class="green">With the .green class</vic-tooltip><br>
   <p class="bold"><vic-tooltip class="green">With bold context</vic-tooltip></p><br>
   <a href="https://www.google.com" is="vic-confirm-link">Click with confirm</a>
