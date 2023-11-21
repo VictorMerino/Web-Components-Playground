@@ -12,19 +12,54 @@
     :root {
       --color-primary: #1d185e;
       --color-green: #94fb94;
+      --color-button-primary: #209199;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    #main-content {
+      padding: 2rem;
     }
   </style>
   <script src="./tooltip/tooltip.js"></script>
+  <script src="./modal/modal.js"></script>
+  <script src="./modal/simple-modal.js"></script>
   <script src="./confirm-link/confirm-link.js"></script>
 </head>
 
 <body>
-  <vic-tooltip></vic-tooltip><br>
-  <vic-tooltip>Without text attr</vic-tooltip><br>
-  <vic-tooltip text="Text of the first tooltip"><span>This is highligthed because it's in a span</span></vic-tooltip><br>
-  <vic-tooltip text="Text of the second tooltip" class="green">With the .green class</vic-tooltip><br>
-  <p class="bold"><vic-tooltip class="green">With bold context</vic-tooltip></p><br>
-  <a href="https://www.google.com" is="vic-confirm-link">Click with confirm</a>
+  <div id="main-content">
+    <vic-tooltip></vic-tooltip><br>
+    <vic-tooltip>Without text attr</vic-tooltip><br>
+    <vic-tooltip text="Text of the first tooltip"><span>This is highligthed because it's in a span</span></vic-tooltip><br>
+    <vic-tooltip text="Text of the second tooltip" class="green">With the .green class</vic-tooltip><br>
+    <p class="bold"><vic-tooltip class="green">With bold context</vic-tooltip></p><br>
+    <a href="https://www.google.com" is="vic-confirm-link">Click with confirm</a>
+
+    <p>---</p>
+    <p><button id="openSimpleModalButton">Open simple modal</button></p>
+    <vic-simple-modal></vic-simple-modal>
+
+    <p>---</p>
+    <p><button id="openModalButton">Open normal modal</button></p>
+    <vic-modal></vic-modal>
+    <script>
+      const openSimpleButton = document.querySelector('#openSimpleModalButton');
+      const simpleModal = document.querySelector('vic-simple-modal');
+      openSimpleButton.addEventListener('click', () => {
+        simpleModal.setAttribute('open', '')
+      })
+
+      const openButton = document.querySelector('#openModalButton');
+      const modal = document.querySelector('vic-modal');
+      openButton.addEventListener('click', () => {
+        modal.setAttribute('open', '')
+      })
+    </script>
+  </div>
+
 </body>
 
 </html>
