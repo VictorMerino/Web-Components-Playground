@@ -2,6 +2,7 @@ class Tooltip extends HTMLElement {
   constructor() {
     super();
     this._tooltipContainer;
+    this._tooltipIcon;
     this._tooltipText = "Default text";
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = /*html*/ `
@@ -56,14 +57,21 @@ class Tooltip extends HTMLElement {
   connectedCallback() {
     const textAttribute = this.getAttribute("text");
     if (textAttribute) this._tooltipText = textAttribute;
-    const tooltipIcon = this.shadowRoot.querySelector("span");
-    tooltipIcon.addEventListener("mouseenter", this._showTooltip.bind(this));
-    tooltipIcon.addEventListener("mouseleave", this._hideTooltip.bind(this));
-    this.shadowRoot.appendChild(tooltipIcon);
+    this._tooltipIcon = this.shadowRoot.querySelector("span");
+    this._tooltipIcon.addEventListener("mouseenter", this._showTooltip.bind(this));
+    this._tooltipIcon.addEventListener("mouseleave", this._hideTooltip.bind(this));
+    this.shadowRoot.appendChild(this._tooltipIcon);
+  }
+
+  // onDestroy
+  disconnectedCallback() {
+    console.log('Clean up event listener on component destroy');
+    this._tooltipIcon.removeEventListener("mouseenter", this._showTooltip);
+    this._tooltipIcon.removeEventListener("mouseleave", this._hideTooltip);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log({name, oldValue, newValue})
+    console.log({name, oldValue, newValue});
     if (oldValue === newValue) return
 
     if(name === 'text') {
