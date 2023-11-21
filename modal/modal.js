@@ -55,7 +55,9 @@ class Modal extends HTMLElement {
       </style>
       <div id="modal" class="hidden">
         <section class="modal-header">
-          <h3>Header</h3>
+          <slot name="header">
+            <h3>Header</h3>
+          </slot>
         </section>
         <section class="modal-main">
           <slot>Modal content</slot>

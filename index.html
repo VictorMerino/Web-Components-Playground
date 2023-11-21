@@ -44,7 +44,10 @@
 
     <p>---</p>
     <p><button id="openModalButton">Open normal modal</button></p>
-    <vic-modal></vic-modal>
+    <vic-modal>
+      <h2 slot="header">Custom header</h2>
+      Modal main section content
+    </vic-modal>
     <script>
       const openSimpleButton = document.querySelector('#openSimpleModalButton');
       const simpleModal = document.querySelector('vic-simple-modal');
