@@ -1,7 +1,6 @@
 class Tooltip extends HTMLElement {
   constructor() {
     super();
-    this._tooltipContainer;
     this._tooltipIcon;
     this._tooltipText = "Default text";
     this.attachShadow({ mode: "open" });
@@ -53,21 +52,37 @@ class Tooltip extends HTMLElement {
     `;
   }
 
+  _toggle(show) {
+    let tooltipContainer = this.shadowRoot.querySelector('div')
+    if(show) this._show(tooltipContainer)
+    else this._hide(tooltipContainer)
+  }
+
+  _show(tooltipContainer) {
+    tooltipContainer = document.createElement("div");
+    tooltipContainer.textContent = this._tooltipText;
+    this.shadowRoot.appendChild(tooltipContainer);
+  }
+
+  _hide(tooltipContainer) {
+    this.shadowRoot.removeChild(tooltipContainer);
+  }
+
   // onMounted
   connectedCallback() {
     const textAttribute = this.getAttribute("text");
     if (textAttribute) this._tooltipText = textAttribute;
     this._tooltipIcon = this.shadowRoot.querySelector("span");
-    this._tooltipIcon.addEventListener("mouseenter", this._showTooltip.bind(this));
-    this._tooltipIcon.addEventListener("mouseleave", this._hideTooltip.bind(this));
+    this._tooltipIcon.addEventListener("mouseenter", this._toggle.bind(this, true));
+    this._tooltipIcon.addEventListener("mouseleave", this._toggle.bind(this, false));
     this.shadowRoot.appendChild(this._tooltipIcon);
   }
 
   // onDestroy
   disconnectedCallback() {
     console.log('Clean up event listener on component destroy');
-    this._tooltipIcon.removeEventListener("mouseenter", this._showTooltip);
-    this._tooltipIcon.removeEventListener("mouseleave", this._hideTooltip);
+    this._tooltipIcon.removeEventListener("mouseenter", this._show);
+    this._tooltipIcon.removeEventListener("mouseleave", this._hide);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -83,15 +98,6 @@ class Tooltip extends HTMLElement {
     return ['text']
   }
 
-  _showTooltip() {
-    this._tooltipContainer = document.createElement("div");
-    this._tooltipContainer.textContent = this._tooltipText;
-    this.shadowRoot.appendChild(this._tooltipContainer);
-  }
-
-  _hideTooltip() {
-    this.shadowRoot.removeChild(this._tooltipContainer);
-  }
 }
 
 customElements.define("vic-tooltip", Tooltip);
