@@ -83,7 +83,7 @@ class SimpleModal extends HTMLElement {
 
   _close() {
     console.log('close')
-    this.shadowRoot.host.removeAttribute('open')
+    this.removeAttribute('open')
   }
 
 }

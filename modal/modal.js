@@ -103,7 +103,11 @@ class Modal extends HTMLElement {
   }
 
   _close() {
-    this.shadowRoot.host.removeAttribute('open')
+    this.removeAttribute('open')
+  }
+
+  open() {
+    this.setAttribute('open', '')
   }
 
 
