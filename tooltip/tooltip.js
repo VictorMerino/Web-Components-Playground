@@ -52,6 +52,19 @@ class Tooltip extends HTMLElement {
     `;
   }
 
+  static get observedAttributes() {
+    return ['text']
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log({name, oldValue, newValue});
+    if (oldValue === newValue) return
+
+    if(name === 'text') {
+      this._tooltipText = newValue
+    }
+  }
+
   _toggle(show) {
     let tooltipContainer = this.shadowRoot.querySelector('div')
     if(show) this._show(tooltipContainer)
@@ -83,19 +96,6 @@ class Tooltip extends HTMLElement {
     console.log('Clean up event listener on component destroy');
     this._tooltipIcon.removeEventListener("mouseenter", this._show);
     this._tooltipIcon.removeEventListener("mouseleave", this._hide);
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    console.log({name, oldValue, newValue});
-    if (oldValue === newValue) return
-
-    if(name === 'text') {
-      this._tooltipText = newValue
-    }
-  }
-
-  static get observedAttributes() {
-    return ['text']
   }
 
 }
