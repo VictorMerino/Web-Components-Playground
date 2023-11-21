@@ -52,6 +52,7 @@ class Tooltip extends HTMLElement {
     `;
   }
 
+  // onMounted
   connectedCallback() {
     const textAttribute = this.getAttribute("text");
     if (textAttribute) this._tooltipText = textAttribute;
@@ -59,6 +60,14 @@ class Tooltip extends HTMLElement {
     tooltipIcon.addEventListener("mouseenter", this._showTooltip.bind(this));
     tooltipIcon.addEventListener("mouseleave", this._hideTooltip.bind(this));
     this.shadowRoot.appendChild(tooltipIcon);
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log({name, oldValue, newValue})
+  }
+
+  static get observedAttributes() {
+    return ['text']
   }
 
   _showTooltip() {
