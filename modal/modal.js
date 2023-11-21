@@ -70,7 +70,7 @@ class Modal extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return
-    console.log({name, newValue})
+
     if (name === 'open') {
       if (this.hasAttribute('open')) {
         console.log(document.querySelector('#backdrop'))
