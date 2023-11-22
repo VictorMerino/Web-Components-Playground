@@ -5,6 +5,9 @@ class Modal extends HTMLElement {
     this.isOpen = false;
     this.shadowRoot.innerHTML = /*html*/ `
       <style>
+        :host {
+          --gap-size: 1.25rem;
+        }
         #backdrop {
           position: fixed;
           top: 0;
@@ -22,25 +25,37 @@ class Modal extends HTMLElement {
           position: fixed;
           top: 15vh;
           left: 25%;
-          padding: 2rem 3rem;
+          padding: 1.25rem;
           width: 40%;
-          min-height: 20rem;
           background-color: white;
-          border-radius: 1rem;
+          border-radius: .5rem;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
         }
 
         .hidden { display: none!important }
 
-        .modal-header {}
-        .modal-main {}
+        .modal-header {
+          padding-bottom: var(--gap-size);
+          border-bottom: 1px solid #ececec;
+        }
+
+        ::slotted(h2) {
+          margin: 0
+        }
+
+        .modal-main {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 6rem;
+        }
 
         .modal-footer {
           border-top: 1px solid #ececec;
           display: flex;
           justify-content: flex-end;
-          gap: 1rem;
-          padding-top: 1rem
+          gap: var(--gap-size);
+          padding-top: var(--gap-size)
         }
 
         button {
