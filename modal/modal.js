@@ -94,13 +94,22 @@ class Modal extends HTMLElement {
     this.shadowRoot.querySelector('#confirm', this._confirm.bind(this))
     this.shadowRoot.querySelector('#confirm').addEventListener('click', this._confirm.bind(this))
     this.shadowRoot.querySelector('#cancel').addEventListener('click', this._cancel.bind(this))
+
+    const slots = this.shadowRoot.querySelectorAll('slot')
+    slots[1].addEventListener('slotchange', event => {
+      // Note: this event doesn't fire if the children change
+      // only if the full parent does it
+      console.dir(slots[1].assignedNodes())
+    })
   }
 
   _confirm() {
+    console.log('Confirm btn')
     this._close()
   }
 
   _cancel() {
+    console.log('Cancel btn')
     this._close()
   }
 
