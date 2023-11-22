@@ -23,13 +23,22 @@ class Modal extends HTMLElement {
           justify-content: space-between;
           z-index: 11;
           position: fixed;
-          top: 15vh;
+          top: 0;
           left: 25%;
           padding: 1.25rem;
           width: 40%;
           background-color: white;
           border-radius: .5rem;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+          /*
+            To be able to animate we should change the show/hide functionality into opacity + pointer-events
+            instead of display (display is not animatable)
+            transition: all 0.3 ease-out;
+          */
+        }
+
+        :host([open]) #modal {
+          top: 15vh;
         }
 
         .hidden { display: none!important }
