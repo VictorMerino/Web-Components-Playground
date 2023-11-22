@@ -93,6 +93,10 @@ class Modal extends HTMLElement {
     this.shadowRoot.querySelector('#confirm', this._confirm.bind(this))
     this.shadowRoot.querySelector('#confirm').addEventListener('click', this._confirm.bind(this))
     this.shadowRoot.querySelector('#cancel').addEventListener('click', this._cancel.bind(this))
+    this.shadowRoot.querySelector('#backdrop').addEventListener('click', this._cancel.bind(this))
+    document.addEventListener('keyup', event => {
+      if(event.key === 'Escape') this._cancel(event)
+    })
 
     const slots = this.shadowRoot.querySelectorAll('slot')
     slots[1].addEventListener('slotchange', event => {
@@ -104,7 +108,7 @@ class Modal extends HTMLElement {
 
   _confirm() {
     this._close()
-    // Dispatch event to the light DOM, the WebComponents way
+    // Dispatch event to the light DOM, the WebComponents way. Better one
     const confirmEvent = new Event('confirm')
     this.dispatchEvent(confirmEvent)
   }
