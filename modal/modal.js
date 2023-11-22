@@ -2,7 +2,7 @@ class Modal extends HTMLElement {
   constructor() {
     super()
     this.attachShadow({mode: 'open'})
-    this._isModalOpen = false;
+    this.isOpen = false;
     this.shadowRoot.innerHTML = /*html*/ `
       <style>
         #backdrop {
@@ -75,7 +75,6 @@ class Modal extends HTMLElement {
 
     if (name === 'open') {
       if (this.hasAttribute('open')) {
-        console.log(document.querySelector('#backdrop'))
         this.shadowRoot.querySelector('#backdrop').classList.remove('hidden')
         this.shadowRoot.querySelector('#modal').classList.remove('hidden')
       }
@@ -115,10 +114,13 @@ class Modal extends HTMLElement {
 
   _close() {
     this.removeAttribute('open')
+    this.isOpen = false
   }
 
   open() {
+    console.log('openModal')
     this.setAttribute('open', '')
+    this.isOpen = true
   }
 
 

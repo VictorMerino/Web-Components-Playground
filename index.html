@@ -58,7 +58,7 @@
       const openButton = document.querySelector('#openModalButton');
       const modal = document.querySelector('vic-modal');
       openButton.addEventListener('click', () => {
-        modal.open()
+        if (!modal.isOpen) modal.open()
       })
     </script>
   </div>
