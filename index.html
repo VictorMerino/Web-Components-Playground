@@ -60,6 +60,12 @@
       openButton.addEventListener('click', () => {
         if (!modal.isOpen) modal.open()
       })
+      modal.addEventListener('cancel', () => {
+        console.log('Modal has been cancelled')
+      })
+      modal.addEventListener('confirm', () => {
+        console.log('Modal has been confirmed')
+      })
     </script>
   </div>
 

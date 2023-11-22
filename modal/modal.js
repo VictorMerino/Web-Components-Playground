@@ -103,13 +103,17 @@ class Modal extends HTMLElement {
   }
 
   _confirm() {
-    console.log('Confirm btn')
     this._close()
+    // Dispatch event to the light DOM, the WebComponents way
+    const confirmEvent = new Event('confirm')
+    this.dispatchEvent(confirmEvent)
   }
 
-  _cancel() {
-    console.log('Cancel btn')
+  _cancel(event) {
     this._close()
+    // Dispatch event, the verbose way
+    const cancelEvent = new Event('cancel', { bubbles: true, composed: true })
+    event.target.dispatchEvent(cancelEvent)
   }
 
   _close() {
