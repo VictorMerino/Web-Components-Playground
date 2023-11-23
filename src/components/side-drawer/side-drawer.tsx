@@ -9,7 +9,7 @@ export class SideDrawer {
   // "Reflect" property reflect the attr change in the light dom HTML
   @Prop({ reflect: true }) sdTitle: string;
   // If we're only going to change some styles it isn't actually needed:
-  @Prop() open: boolean;
+  @Prop({ reflect: true }) open: boolean;
 
   render() {
     // // Easy but less powerful way:

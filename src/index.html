@@ -29,6 +29,7 @@
 </head>
 
 <body>
+  <button data-open="side-menu">Open side menu</button>
   <vic-side-drawer sd-title="Side Drawer Title">
     <nav class="side-nav">
       <ul>
@@ -45,6 +46,11 @@
     setTimeout(() => {
       sideDrawer.sdTitle = 'Title Programaticaly changed'
     }, 3000)
+
+    const sideDrawerButton = document.querySelector('[data-open="side-menu"]')
+    sideDrawerButton.addEventListener('click', () => {
+      if (!sideDrawer.open) sideDrawer.open = true
+    })
   </script>
 </body>
 
