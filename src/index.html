@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/web-components-playground.esm.js"></script>
-    <script nomodule src="/build/web-components-playground.js"></script>
-  </head>
-  <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    .side-nav ul {
+      list-style: none;
+    }
+
+    .side-nav li {
+      margin-bottom: .5rem;
+    }
+
+    .side-nav a {
+      text-decoration: none;
+    }
+  </style>
+
+  <script type="module" src="/build/web-components-playground.esm.js"></script>
+  <script nomodule src="/build/web-components-playground.js"></script>
+</head>
+
+<body>
+  <vic-side-drawer sd-title="Side Drawer Title">
+    <nav class="side-nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/page-1">Page 1</a></li>
+        <li><a href="/page-2">Page 2</a></li>
+      </ul>
+    </nav>
+  </vic-side-drawer>
+  <my-component first="Stencil" last="'Don't call me a framework' JS."></my-component>
+
+  <script>
+    const sideDrawer = document.querySelector('vic-side-drawer')
+    setTimeout(() => {
+      sideDrawer.sdTitle = 'Title Programaticaly changed'
+    }, 3000)
+  </script>
+</body>
+
 </html>
