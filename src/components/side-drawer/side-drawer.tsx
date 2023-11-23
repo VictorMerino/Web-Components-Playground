@@ -8,10 +8,12 @@ import { Component, Prop, h } from '@stencil/core';
 export class SideDrawer {
   // "Reflect" property reflect the attr change in the light dom HTML
   @Prop({ reflect: true }) sdTitle: string;
+  // If we're only going to change some styles it isn't actually needed:
   @Prop() open: boolean;
 
   render() {
-    if (!this.open) return null;
+    // // Easy but less powerful way:
+    // if (!this.open) return null;
 
     return (
       <aside>
