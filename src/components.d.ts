@@ -20,6 +20,8 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface StockPrice {
+    }
     interface VicSideDrawer {
         "open": () => Promise<void>;
         "opened": boolean;
@@ -33,6 +35,12 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLStockPriceElement extends Components.StockPrice, HTMLStencilElement {
+    }
+    var HTMLStockPriceElement: {
+        prototype: HTMLStockPriceElement;
+        new (): HTMLStockPriceElement;
+    };
     interface HTMLVicSideDrawerElement extends Components.VicSideDrawer, HTMLStencilElement {
     }
     var HTMLVicSideDrawerElement: {
@@ -41,6 +49,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "stock-price": HTMLStockPriceElement;
         "vic-side-drawer": HTMLVicSideDrawerElement;
     }
 }
@@ -59,12 +68,15 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface StockPrice {
+    }
     interface VicSideDrawer {
         "opened"?: boolean;
         "sdTitle"?: string;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "stock-price": StockPrice;
         "vic-side-drawer": VicSideDrawer;
     }
 }
@@ -73,6 +85,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "stock-price": LocalJSX.StockPrice & JSXBase.HTMLAttributes<HTMLStockPriceElement>;
             "vic-side-drawer": LocalJSX.VicSideDrawer & JSXBase.HTMLAttributes<HTMLVicSideDrawerElement>;
         }
     }
