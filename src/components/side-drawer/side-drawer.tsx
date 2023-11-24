@@ -14,7 +14,7 @@ export class SideDrawer {
   @State() tabOpened = 'nav';
   @State() mainContent = (<slot />);
 
-  onCloseDrawer() {
+  closeDrawer() {
     this.opened = false;
   }
 
@@ -45,10 +45,10 @@ export class SideDrawer {
     // // Easy but less powerful way:
     // if (!this.opened) return null;
 
-    return (
+    return [
       <aside>
         <header>
-          <button onClick={this.onCloseDrawer.bind(this)}>X</button>
+          <button onClick={this.closeDrawer.bind(this)}>X</button>
           <p>{this.sdTitle}</p>
         </header>
         <section id="tabs">
@@ -60,7 +60,8 @@ export class SideDrawer {
           </button>
         </section>
         <main>{this.mainContent}</main>
-      </aside>
-    );
+      </aside>,
+      <div id="backdrop" onClick={this.closeDrawer.bind(this)}></div>,
+    ];
   }
 }
