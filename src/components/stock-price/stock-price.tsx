@@ -1,4 +1,4 @@
-import { Component, State, h, Element } from '@stencil/core';
+import { Component, State, h } from '@stencil/core';
 
 import { ALPHA_VANTAGE_API_KEY } from '../../global/globals';
 
@@ -8,12 +8,17 @@ import { ALPHA_VANTAGE_API_KEY } from '../../global/globals';
   shadow: true,
 })
 export class StockPrice {
-  @Element() el: HTMLElement;
+  textInput!: HTMLInputElement;
   @State() price = 0;
-  async fetchStockPrice(event: Event) {
-    event.preventDefault();
 
-    const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value || 'IBM';
+  handleSubmit = (event: Event) => {
+    event.preventDefault();
+    const stockSymbol = this.textInput.value;
+    this.fetchStockPrice(stockSymbol);
+  };
+
+  async fetchStockPrice(stockSymbol: string) {
+    // const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value || 'IBM';
     const quote = 'GLOBAL_QUOTE';
     const apiUrl = 'https://www.alphavantage.co/query';
     const fetchUri = `${apiUrl}?function=${quote}&symbol=${stockSymbol}&apikey=${ALPHA_VANTAGE_API_KEY}`;
@@ -28,8 +33,8 @@ export class StockPrice {
   }
   render() {
     return [
-      <form onSubmit={this.fetchStockPrice.bind(this)}>
-        <input type="text" id="stock-symbol" />
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" ref={el => (this.textInput = el as HTMLInputElement)} />
         <button type="submit">Fetch</button>
       </form>,
 
