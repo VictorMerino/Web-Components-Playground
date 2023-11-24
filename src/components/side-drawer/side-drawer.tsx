@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 
 @Component({
   tag: 'vic-side-drawer',
@@ -11,8 +11,28 @@ export class SideDrawer {
   // If we're only going to change some styles it isn't actually needed:
   @Prop({ reflect: true, mutable: true }) open: boolean;
 
+  @State() tabOpened = 'nav';
+  @State() mainContent = (<slot />);
+
   onCloseDrawer() {
     this.open = false;
+  }
+
+  onTabChange(content: string) {
+    console.log(content);
+    this.tabOpened = content;
+    if (content === 'contact') {
+      this.mainContent = (
+        <div id="contact-info">
+          <h2>Contact info</h2>
+          <div>You can reach us via phone or email</div>
+          <ul>
+            <li>Phone: 666 000 666</li>
+            <li>E-mail: mail@mail.to</li>
+          </ul>
+        </div>
+      );
+    } else this.mainContent = <slot />;
   }
 
   render() {
@@ -25,9 +45,15 @@ export class SideDrawer {
           <button onClick={this.onCloseDrawer.bind(this)}>X</button>
           <p>{this.sdTitle}</p>
         </header>
-        <main>
-          <slot />
-        </main>
+        <section id="tabs">
+          <button onClick={this.onTabChange.bind(this, 'nav')} class={this.tabOpened === 'nav' ? 'active' : ''}>
+            Nav
+          </button>
+          <button onClick={this.onTabChange.bind(this, 'contact')} class={this.tabOpened === 'contact' ? 'active' : ''}>
+            Contact
+          </button>
+        </section>
+        <main>{this.mainContent}</main>
       </aside>
     );
   }
