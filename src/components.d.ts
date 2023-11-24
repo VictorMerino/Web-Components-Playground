@@ -21,7 +21,8 @@ export namespace Components {
         "middle": string;
     }
     interface VicSideDrawer {
-        "open": boolean;
+        "open": () => Promise<void>;
+        "opened": boolean;
         "sdTitle": string;
     }
 }
@@ -59,7 +60,7 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface VicSideDrawer {
-        "open"?: boolean;
+        "opened"?: boolean;
         "sdTitle"?: string;
     }
     interface IntrinsicElements {

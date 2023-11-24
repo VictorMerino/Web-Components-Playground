@@ -49,7 +49,7 @@
 
     const sideDrawerButton = document.querySelector('[data-open="side-menu"]')
     sideDrawerButton.addEventListener('click', () => {
-      if (!sideDrawer.open) sideDrawer.open = true
+      if (!sideDrawer.opened) sideDrawer.open()
     })
   </script>
 </body>

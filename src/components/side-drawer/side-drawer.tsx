@@ -1,4 +1,4 @@
-import { Component, Prop, State, h } from '@stencil/core';
+import { Component, Method, Prop, State, h } from '@stencil/core';
 
 @Component({
   tag: 'vic-side-drawer',
@@ -9,13 +9,19 @@ export class SideDrawer {
   // "Reflect" property reflect the attr change in the light dom HTML
   @Prop({ reflect: true }) sdTitle: string;
   // If we're only going to change some styles it isn't actually needed:
-  @Prop({ reflect: true, mutable: true }) open: boolean;
+  @Prop({ reflect: true, mutable: true }) opened: boolean;
 
   @State() tabOpened = 'nav';
   @State() mainContent = (<slot />);
 
   onCloseDrawer() {
-    this.open = false;
+    this.opened = false;
+  }
+
+  @Method()
+  open() {
+    console.log('Open method');
+    this.opened = true;
   }
 
   onTabChange(content: string) {
@@ -37,7 +43,7 @@ export class SideDrawer {
 
   render() {
     // // Easy but less powerful way:
-    // if (!this.open) return null;
+    // if (!this.opened) return null;
 
     return (
       <aside>
