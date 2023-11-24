@@ -1,16 +1,25 @@
-import { Component, State, h } from '@stencil/core';
+import { Component, State, h, Element } from '@stencil/core';
+
+import { ALPHA_VANTAGE_API_KEY } from '../../global/globals';
 
 @Component({
   tag: 'stock-price',
   styleUrl: 'stock-price.css',
+  shadow: true,
 })
 export class StockPrice {
+  @Element() el: HTMLElement;
   @State() price = 0;
   async fetchStockPrice(event: Event) {
     event.preventDefault();
-    console.log('submit');
+
+    const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value || 'IBM';
+    const quote = 'GLOBAL_QUOTE';
+    const apiUrl = 'https://www.alphavantage.co/query';
+    const fetchUri = `${apiUrl}?function=${quote}&symbol=${stockSymbol}&apikey=${ALPHA_VANTAGE_API_KEY}`;
+
     try {
-      const response = await fetch('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo');
+      const response = await fetch(fetchUri);
       const result = await response.json();
       this.price = result['Global Quote']['05. price'];
     } catch (err) {
