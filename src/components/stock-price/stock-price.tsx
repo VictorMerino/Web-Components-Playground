@@ -13,6 +13,7 @@ export class StockPrice {
   @State() price = 0;
   @State() userInput: string;
   @State() userInputIsValid = false;
+  @State() error: string;
 
   onUserInput = (event: Event) => {
     this.userInput = (event.target as HTMLInputElement).value;
@@ -34,12 +35,27 @@ export class StockPrice {
     try {
       const response = await fetch(fetchUri);
       const result = await response.json();
-      this.price = result['Global Quote']['05. price'];
+
+      const globalQuote = result['Global Quote'];
+      if (!globalQuote) {
+        if (result.Information) throw new Error(result.Information);
+        throw new Error('No global quote');
+      }
+      const price = globalQuote['05. price'];
+      if (!price) throw new Error('Invalid symbol');
+      this.error = null;
+      this.price = price;
     } catch (err) {
-      console.log(err);
+      this.error = err.message;
     }
   }
   render() {
+    // TO-DO: this code can be improved, 4 sure. Refactor later, please...
+    // If no input, also 'enter a symbol' should be shown
+    let resultContent = <p>Please, enter a symbol!</p>;
+    if (this.error) resultContent = <p class="error">{this.error}</p>;
+    else if (!this.price) resultContent = <p>Please, enter a symbol!</p>;
+    else resultContent = <p>Price: {this.price}</p>;
     return [
       <form onSubmit={this.handleSubmit}>
         <input type="text" ref={el => (this.el = el as HTMLInputElement)} value={this.userInput} onInput={this.onUserInput} />
@@ -48,9 +64,7 @@ export class StockPrice {
         </button>
       </form>,
 
-      <div>
-        <p>Price: {this.price}</p>
-      </div>,
+      <div>{resultContent}</div>,
     ];
   }
 }
