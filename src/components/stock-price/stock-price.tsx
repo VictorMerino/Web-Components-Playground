@@ -14,6 +14,7 @@ export class StockPrice {
   @State() userInput: string;
   @State() userInputIsValid = false;
   @State() error: string;
+  @State() resultContent = (<p>Please, enter a symbol!</p>);
 
   onUserInput = (event: Event) => {
     this.userInput = (event.target as HTMLInputElement).value;
@@ -47,15 +48,14 @@ export class StockPrice {
       this.price = price;
     } catch (err) {
       this.error = err.message;
+    } finally {
+      // TO-DO: this code can be improved, 4 sure. Refactor later, please...
+      // If no input, also 'enter a symbol' should be shown
+      if (this.error) this.resultContent = <p class="error">{this.error}</p>;
+      else if (!this.error && this.price) this.resultContent = <p>Price: {this.price}</p>;
     }
   }
   render() {
-    // TO-DO: this code can be improved, 4 sure. Refactor later, please...
-    // If no input, also 'enter a symbol' should be shown
-    let resultContent = <p>Please, enter a symbol!</p>;
-    if (this.error) resultContent = <p class="error">{this.error}</p>;
-    else if (!this.price) resultContent = <p>Please, enter a symbol!</p>;
-    else resultContent = <p>Price: {this.price}</p>;
     return [
       <form onSubmit={this.handleSubmit}>
         <input type="text" ref={el => (this.el = el as HTMLInputElement)} value={this.userInput} onInput={this.onUserInput} />
@@ -64,7 +64,7 @@ export class StockPrice {
         </button>
       </form>,
 
-      <div>{resultContent}</div>,
+      <div>{this.resultContent}</div>,
     ];
   }
 }
