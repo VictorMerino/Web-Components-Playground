@@ -31,3 +31,7 @@ form button:active {
   border-color: lightgrey;
   background-color: lightgrey;
 }
+
+form button[disabled] {
+  cursor: not-allowed;
+}

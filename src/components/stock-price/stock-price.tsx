@@ -11,6 +11,13 @@ export class StockPrice {
   el!: HTMLInputElement;
 
   @State() price = 0;
+  @State() userInput: string;
+  @State() userInputIsValid = false;
+
+  onUserInput = (event: Event) => {
+    this.userInput = (event.target as HTMLInputElement).value;
+    this.userInputIsValid = !!this.userInput.trim();
+  };
 
   handleSubmit = (event: Event) => {
     event.preventDefault();
@@ -35,8 +42,10 @@ export class StockPrice {
   render() {
     return [
       <form onSubmit={this.handleSubmit}>
-        <input type="text" ref={el => (this.el = el as HTMLInputElement)} />
-        <button type="submit">Fetch</button>
+        <input type="text" ref={el => (this.el = el as HTMLInputElement)} value={this.userInput} onInput={this.onUserInput} />
+        <button type="submit" disabled={!this.userInputIsValid}>
+          Fetch
+        </button>
       </form>,
 
       <div>
