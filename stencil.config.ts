@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { env } from '@alepop/stencil-env';
 
 export const config: Config = {
   namespace: 'web-components-playground',
@@ -19,6 +20,7 @@ export const config: Config = {
     },
   ],
   testing: {
-    browserHeadless: "new",
+    browserHeadless: 'new',
   },
+  plugins: [env()],
 };
