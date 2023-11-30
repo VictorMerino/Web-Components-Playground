@@ -8,12 +8,13 @@ import { ALPHA_VANTAGE_API_KEY } from '../../global/globals';
   shadow: true,
 })
 export class StockPrice {
-  textInput!: HTMLInputElement;
+  el!: HTMLInputElement;
+
   @State() price = 0;
 
   handleSubmit = (event: Event) => {
     event.preventDefault();
-    const stockSymbol = this.textInput.value;
+    const stockSymbol = this.el.value;
     this.fetchStockPrice(stockSymbol);
   };
 
@@ -34,7 +35,7 @@ export class StockPrice {
   render() {
     return [
       <form onSubmit={this.handleSubmit}>
-        <input type="text" ref={el => (this.textInput = el as HTMLInputElement)} />
+        <input type="text" ref={el => (this.el = el as HTMLInputElement)} />
         <button type="submit">Fetch</button>
       </form>,
 
