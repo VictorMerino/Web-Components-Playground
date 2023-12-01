@@ -57,7 +57,7 @@
     const stockFinderEl = document.querySelector('vic-stock-finder')
     stockFinderEl.addEventListener('vicSymbolSelected', event => {
       console.log(event)
-      console.log(event.detail)
+      console.log('Event listen in the Light DOM', event.detail)
     })
   </script>
 </body>

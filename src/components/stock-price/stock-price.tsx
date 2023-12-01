@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Listen, Prop, State, Watch, h } from '@stencil/core';
 
 import { ALPHA_VANTAGE_API_KEY } from '../../global/globals';
 
@@ -93,6 +93,14 @@ export class StockPrice {
 
   disconnectedCallback() {
     console.log('disconnectedCallback');
+  }
+
+  @Listen('vicSymbolSelected', { target: 'body' })
+  onStockSymbolSelected(event: CustomEvent) {
+    console.log('Listened from inside StockPrice component', event.detail);
+    if (event.detail && event.detail !== this.stockSymbol) {
+      this.stockSymbol = event.detail;
+    }
   }
 
   render() {
