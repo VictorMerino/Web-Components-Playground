@@ -1,0 +1,41 @@
+:host {
+  display: block;
+  border: 2px solid black;
+  margin: 2rem;
+  padding: 1rem;
+  width: 20rem;
+  max-width: 100%;
+}
+
+form input {
+  margin-bottom: 0.5rem;
+  font: inherit;
+  color: black;
+  padding: 0.1rem 0.25rem;
+}
+
+form input:focus {
+  outline: none;
+}
+
+form button {
+  font: inherit;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background-color: rgb(212, 209, 209);
+  cursor: pointer;
+}
+
+form button:hover,
+form button:active {
+  border-color: lightgrey;
+  background-color: lightgrey;
+}
+
+form button[disabled] {
+  cursor: not-allowed;
+}
+
+p.error {
+  color: rgb(157, 18, 18);
+}
