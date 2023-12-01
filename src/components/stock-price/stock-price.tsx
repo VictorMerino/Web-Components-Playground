@@ -59,10 +59,26 @@ export class StockPrice {
     }
   }
 
+  componentWillLoad() {
+    console.log('componentWillLoad', this.stockSymbol);
+  }
+
   componentDidLoad() {
     if (this.stockSymbol) {
       this.fetchStockPrice(this.stockSymbol);
     }
+  }
+
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
+  disconnectedCallback() {
+    console.log('disconnectedCallback');
   }
 
   render() {
