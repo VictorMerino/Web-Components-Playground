@@ -7,6 +7,10 @@
   max-width: 100%;
 }
 
+:host(.error) {
+  border-color: red;
+}
+
 form input {
   margin-bottom: 0.5rem;
   font: inherit;

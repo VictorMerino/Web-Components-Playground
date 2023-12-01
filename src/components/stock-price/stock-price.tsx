@@ -103,6 +103,12 @@ export class StockPrice {
     }
   }
 
+  hostData() {
+    return {
+      class: this.error && 'error',
+    };
+  }
+
   render() {
     return [
       <form onSubmit={this.handleSubmit}>
