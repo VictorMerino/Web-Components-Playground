@@ -55,7 +55,15 @@ export class StockFinder {
         <input type="text" ref={el => (this.el = el as HTMLInputElement)} value={this.userInput} onInput={this.onUserInput} />
         <button type="submit">Find company</button>
       </form>,
-      <ul>{this.bestMatches && this.bestMatches.length > 0 ? this.bestMatches.map(match => <li>{match.name}</li>) : 'na'}</ul>,
+      <ul>
+        {this.bestMatches && this.bestMatches.length > 0
+          ? this.bestMatches.map(match => (
+              <li>
+                <strong>{match.symbol}</strong> - {match.name}
+              </li>
+            ))
+          : 'na'}
+      </ul>,
     ];
   }
 }

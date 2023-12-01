@@ -39,3 +39,15 @@ form button[disabled] {
 p.error {
   color: rgb(157, 18, 18);
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  margin: 0.2rem 0;
+  padding: 0.2rem;
+  border: 1px solid;
+}
