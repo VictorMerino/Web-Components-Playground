@@ -1,6 +1,6 @@
 :host {
   display: block;
-  border: 2px solid black;
+  border: 2px solid var(--color-dark, black);
   margin: 2rem;
   padding: 1rem;
   width: 20rem;
@@ -9,7 +9,7 @@
 }
 
 :host(.error) {
-  border-color: red;
+  border-color: var(--color-error, red);
 }
 
 :host(.loading) {
@@ -19,7 +19,7 @@
 form input {
   margin-bottom: 0.5rem;
   font: inherit;
-  color: black;
+  color: var(--color-primary-text, black);
   padding: 0.1rem 0.25rem;
 }
 
@@ -31,14 +31,14 @@ form button {
   font: inherit;
   padding: 0.25rem 0.5rem;
   border: none;
-  background-color: rgb(212, 209, 209);
+  background-color: var(--color-primary, grey);
   cursor: pointer;
 }
 
 form button:hover,
 form button:active {
-  border-color: lightgrey;
-  background-color: lightgrey;
+  border-color: var(--color-highlight, lightgrey);
+  background-color: var(--color-highlight, lightgrey);
 }
 
 form button[disabled] {
@@ -46,5 +46,5 @@ form button[disabled] {
 }
 
 p.error {
-  color: rgb(157, 18, 18);
+  color: var(--color-error, red);
 }
