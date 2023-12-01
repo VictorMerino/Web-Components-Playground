@@ -31,6 +31,10 @@ export namespace Components {
         "stockSymbol": string;
     }
 }
+export interface VicStockFinderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVicStockFinderElement;
+}
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
@@ -44,7 +48,18 @@ declare global {
         prototype: HTMLVicSideDrawerElement;
         new (): HTMLVicSideDrawerElement;
     };
+    interface HTMLVicStockFinderElementEventMap {
+        "vicSymbolSelected": string;
+    }
     interface HTMLVicStockFinderElement extends Components.VicStockFinder, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVicStockFinderElementEventMap>(type: K, listener: (this: HTMLVicStockFinderElement, ev: VicStockFinderCustomEvent<HTMLVicStockFinderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVicStockFinderElementEventMap>(type: K, listener: (this: HTMLVicStockFinderElement, ev: VicStockFinderCustomEvent<HTMLVicStockFinderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVicStockFinderElement: {
         prototype: HTMLVicStockFinderElement;
@@ -83,6 +98,7 @@ declare namespace LocalJSX {
         "sdTitle"?: string;
     }
     interface VicStockFinder {
+        "onVicSymbolSelected"?: (event: VicStockFinderCustomEvent<string>) => void;
     }
     interface VicStockPrice {
         "stockSymbol"?: string;

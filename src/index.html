@@ -53,6 +53,12 @@
     sideDrawerButton.addEventListener('click', () => {
       if (!sideDrawer.opened) sideDrawer.open()
     }) */
+
+    const stockFinderEl = document.querySelector('vic-stock-finder')
+    stockFinderEl.addEventListener('vicSymbolSelected', event => {
+      console.log(event)
+      console.log(event.detail)
+    })
   </script>
 </body>
 

@@ -46,8 +46,15 @@ ul {
   list-style: none;
 }
 
-ul li {
+li {
   margin: 0.2rem 0;
   padding: 0.2rem;
   border: 1px solid;
+  cursor: pointer;
+}
+
+li:hover,
+li:active {
+  background-color: black;
+  color: white;
 }

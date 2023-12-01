@@ -1,4 +1,4 @@
-import { Component, State, h } from '@stencil/core';
+import { Component, Event, EventEmitter, State, h } from '@stencil/core';
 
 import { ALPHA_VANTAGE_API_KEY } from '../../global/globals';
 
@@ -12,6 +12,12 @@ export class StockFinder {
 
   @State() userInput: string;
   @State() bestMatches: { symbol: string; name: string }[];
+
+  @Event({ bubbles: true, composed: true }) vicSymbolSelected: EventEmitter<string>;
+
+  onSymbolSelected(symbol: string) {
+    this.vicSymbolSelected.emit(symbol);
+  }
 
   onUserInput = (event: Event) => {
     this.userInput = (event.target as HTMLInputElement).value;
@@ -58,7 +64,7 @@ export class StockFinder {
       <ul>
         {this.bestMatches && this.bestMatches.length > 0
           ? this.bestMatches.map(match => (
-              <li>
+              <li onClick={this.onSymbolSelected.bind(this, match.symbol)}>
                 <strong>{match.symbol}</strong> - {match.name}
               </li>
             ))
