@@ -1,4 +1,4 @@
-import { Component, Prop, State, h } from '@stencil/core';
+import { Component, Prop, State, Watch, h } from '@stencil/core';
 
 import { ALPHA_VANTAGE_API_KEY } from '../../global/globals';
 
@@ -10,7 +10,15 @@ import { ALPHA_VANTAGE_API_KEY } from '../../global/globals';
 export class StockPrice {
   el!: HTMLInputElement;
 
-  @Prop() stockSymbol: string;
+  @Prop({ mutable: true, reflect: true }) stockSymbol: string;
+
+  @Watch('stockSymbol')
+  stockSymbolChanged(newValue: string, oldValue: string) {
+    if (newValue !== oldValue) {
+      this.userInput = newValue;
+      this.fetchStockPrice(newValue);
+    }
+  }
 
   @State() price = 0;
   @State() userInput: string;
@@ -58,6 +66,8 @@ export class StockPrice {
       else if (!this.error && this.price) this.resultContent = <p>Price: {this.price}</p>;
     }
   }
+
+  // Lifecycle hooks:
 
   componentWillLoad() {
     console.log('componentWillLoad', this.stockSymbol);
