@@ -100,7 +100,7 @@ export class StockPrice {
       <form onSubmit={this.handleSubmit}>
         <input type="text" ref={el => (this.el = el as HTMLInputElement)} value={this.userInput} onInput={this.onUserInput} />
         <button type="submit" disabled={!this.userInputIsValid}>
-          Fetch
+          Fetch stocks
         </button>
       </form>,
 
