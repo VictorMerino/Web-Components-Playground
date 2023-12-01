@@ -25,6 +25,7 @@ export class StockPrice {
   @State() userInputIsValid = false;
   @State() error: string;
   @State() resultContent = (<p>Please, enter a symbol!</p>);
+  @State() isLoading = false;
 
   onUserInput = (event: Event) => {
     this.userInput = (event.target as HTMLInputElement).value;
@@ -64,6 +65,7 @@ export class StockPrice {
       // If no input, also 'enter a symbol' should be shown
       if (this.error) this.resultContent = <p class="error">{this.error}</p>;
       else if (!this.error && this.price) this.resultContent = <p>Price: {this.price}</p>;
+      this.isLoading = false;
     }
   }
 
@@ -103,9 +105,13 @@ export class StockPrice {
     }
   }
 
+  // BE AWARE: this method is deprecated!
   hostData() {
     return {
-      class: this.error && 'error',
+      class: {
+        error: this.error,
+        loading: this.isLoading,
+      },
     };
   }
 
@@ -113,12 +119,26 @@ export class StockPrice {
     return [
       <form onSubmit={this.handleSubmit}>
         <input type="text" ref={el => (this.el = el as HTMLInputElement)} value={this.userInput} onInput={this.onUserInput} />
-        <button type="submit" disabled={!this.userInputIsValid}>
+        <button type="submit" disabled={!this.userInputIsValid || this.isLoading}>
           Fetch stocks
         </button>
       </form>,
 
       <div>{this.resultContent}</div>,
+      <div>
+        {this.isLoading && (
+          <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        )}
+      </div>,
     ];
   }
 }
