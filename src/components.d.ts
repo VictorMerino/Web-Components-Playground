@@ -20,6 +20,8 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface VicLoadingSpinner {
+    }
     interface VicSideDrawer {
         "open": () => Promise<void>;
         "opened": boolean;
@@ -41,6 +43,12 @@ declare global {
     var HTMLMyComponentElement: {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
+    };
+    interface HTMLVicLoadingSpinnerElement extends Components.VicLoadingSpinner, HTMLStencilElement {
+    }
+    var HTMLVicLoadingSpinnerElement: {
+        prototype: HTMLVicLoadingSpinnerElement;
+        new (): HTMLVicLoadingSpinnerElement;
     };
     interface HTMLVicSideDrawerElement extends Components.VicSideDrawer, HTMLStencilElement {
     }
@@ -73,6 +81,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "vic-loading-spinner": HTMLVicLoadingSpinnerElement;
         "vic-side-drawer": HTMLVicSideDrawerElement;
         "vic-stock-finder": HTMLVicStockFinderElement;
         "vic-stock-price": HTMLVicStockPriceElement;
@@ -93,6 +102,8 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface VicLoadingSpinner {
+    }
     interface VicSideDrawer {
         "opened"?: boolean;
         "sdTitle"?: string;
@@ -105,6 +116,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "vic-loading-spinner": VicLoadingSpinner;
         "vic-side-drawer": VicSideDrawer;
         "vic-stock-finder": VicStockFinder;
         "vic-stock-price": VicStockPrice;
@@ -115,6 +127,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "vic-loading-spinner": LocalJSX.VicLoadingSpinner & JSXBase.HTMLAttributes<HTMLVicLoadingSpinnerElement>;
             "vic-side-drawer": LocalJSX.VicSideDrawer & JSXBase.HTMLAttributes<HTMLVicSideDrawerElement>;
             "vic-stock-finder": LocalJSX.VicStockFinder & JSXBase.HTMLAttributes<HTMLVicStockFinderElement>;
             "vic-stock-price": LocalJSX.VicStockPrice & JSXBase.HTMLAttributes<HTMLVicStockPriceElement>;

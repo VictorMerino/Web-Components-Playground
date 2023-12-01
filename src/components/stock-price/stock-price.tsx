@@ -34,15 +34,15 @@ export class StockPrice {
 
   handleSubmit = (event: Event) => {
     event.preventDefault();
-    const stockSymbol = this.el.value;
-    this.fetchStockPrice(stockSymbol);
+    this.stockSymbol = this.el.value;
   };
 
   async fetchStockPrice(stockSymbol: string) {
+    this.isLoading = true;
     // const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value || 'IBM';
     const quote = 'GLOBAL_QUOTE';
     const apiUrl = 'https://www.alphavantage.co/query';
-    const apiKey = stockSymbol === 'IBM' ? 'demo' : `${ALPHA_VANTAGE_API_KEY}`;
+    const apiKey = stockSymbol === 'IBM' ? 'demo' : 'demo'; // `${ALPHA_VANTAGE_API_KEY}`;
     const fetchUri = `${apiUrl}?function=${quote}&symbol=${stockSymbol}&apikey=${apiKey}`;
 
     try {
@@ -125,20 +125,7 @@ export class StockPrice {
       </form>,
 
       <div>{this.resultContent}</div>,
-      <div>
-        {this.isLoading && (
-          <div class="lds-roller">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        )}
-      </div>,
+      <div>{this.isLoading && <vic-loading-spinner />}</div>,
     ];
   }
 }
