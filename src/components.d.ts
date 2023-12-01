@@ -20,12 +20,13 @@ export namespace Components {
          */
         "middle": string;
     }
-    interface StockPrice {
-    }
     interface VicSideDrawer {
         "open": () => Promise<void>;
         "opened": boolean;
         "sdTitle": string;
+    }
+    interface VicStockPrice {
+        "stockSymbol": string;
     }
 }
 declare global {
@@ -35,22 +36,22 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
-    interface HTMLStockPriceElement extends Components.StockPrice, HTMLStencilElement {
-    }
-    var HTMLStockPriceElement: {
-        prototype: HTMLStockPriceElement;
-        new (): HTMLStockPriceElement;
-    };
     interface HTMLVicSideDrawerElement extends Components.VicSideDrawer, HTMLStencilElement {
     }
     var HTMLVicSideDrawerElement: {
         prototype: HTMLVicSideDrawerElement;
         new (): HTMLVicSideDrawerElement;
     };
+    interface HTMLVicStockPriceElement extends Components.VicStockPrice, HTMLStencilElement {
+    }
+    var HTMLVicStockPriceElement: {
+        prototype: HTMLVicStockPriceElement;
+        new (): HTMLVicStockPriceElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
-        "stock-price": HTMLStockPriceElement;
         "vic-side-drawer": HTMLVicSideDrawerElement;
+        "vic-stock-price": HTMLVicStockPriceElement;
     }
 }
 declare namespace LocalJSX {
@@ -68,16 +69,17 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
-    interface StockPrice {
-    }
     interface VicSideDrawer {
         "opened"?: boolean;
         "sdTitle"?: string;
     }
+    interface VicStockPrice {
+        "stockSymbol"?: string;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
-        "stock-price": StockPrice;
         "vic-side-drawer": VicSideDrawer;
+        "vic-stock-price": VicStockPrice;
     }
 }
 export { LocalJSX as JSX };
@@ -85,8 +87,8 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
-            "stock-price": LocalJSX.StockPrice & JSXBase.HTMLAttributes<HTMLStockPriceElement>;
             "vic-side-drawer": LocalJSX.VicSideDrawer & JSXBase.HTMLAttributes<HTMLVicSideDrawerElement>;
+            "vic-stock-price": LocalJSX.VicStockPrice & JSXBase.HTMLAttributes<HTMLVicStockPriceElement>;
         }
     }
 }
