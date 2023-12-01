@@ -12,6 +12,7 @@ export class StockFinder {
 
   @State() userInput: string;
   @State() bestMatches: { symbol: string; name: string }[];
+  @State() isLoading = false;
 
   @Event({ bubbles: true, composed: true }) vicSymbolSelected: EventEmitter<string>;
 
@@ -30,6 +31,7 @@ export class StockFinder {
   };
 
   async fetchSymbol(keywords: string) {
+    this.isLoading = true;
     const quote = 'SYMBOL_SEARCH';
     const apiUrl = 'https://www.alphavantage.co/query';
     const apiKey = keywords === 'BA' ? 'demo' : 'demo'; // `${ALPHA_VANTAGE_API_KEY}`;
@@ -52,7 +54,18 @@ export class StockFinder {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      this.isLoading = false;
     }
+  }
+
+  // BE AWARE: this method is deprecated!
+  hostData() {
+    return {
+      class: {
+        loading: this.isLoading,
+      },
+    };
   }
 
   render() {
@@ -70,6 +83,7 @@ export class StockFinder {
             ))
           : 'na'}
       </ul>,
+      <div>{this.isLoading && <vic-loading-spinner />}</div>,
     ];
   }
 }
