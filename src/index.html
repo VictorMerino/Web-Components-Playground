@@ -37,7 +37,7 @@
 </head>
 
 <body>
-  <!-- <button data-open="side-menu">Open side menu</button> -->
+  <button data-open="side-menu">Open side menu</button>
   <vic-side-drawer sd-title="Side Drawer Title">
     <nav class="side-nav">
       <ul>
@@ -57,10 +57,10 @@
       sideDrawer.sdTitle = 'Title Programaticaly changed'
     }, 3000)
 
-    /* const sideDrawerButton = document.querySelector('[data-open="side-menu"]')
+    const sideDrawerButton = document.querySelector('[data-open="side-menu"]')
     sideDrawerButton.addEventListener('click', () => {
       if (!sideDrawer.opened) sideDrawer.open()
-    }) */
+    })
 
     const stockFinderEl = document.querySelector('vic-stock-finder')
     stockFinderEl.addEventListener('vicSymbolSelected', event => {

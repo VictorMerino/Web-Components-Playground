@@ -42,6 +42,7 @@ export class StockPrice {
     // const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value || 'IBM';
     const quote = 'GLOBAL_QUOTE';
     const apiUrl = 'https://www.alphavantage.co/query';
+    console.log(ALPHA_VANTAGE_API_KEY);
     const apiKey = stockSymbol === 'IBM' ? 'demo' : 'demo'; // `${ALPHA_VANTAGE_API_KEY}`;
     const fetchUri = `${apiUrl}?function=${quote}&symbol=${stockSymbol}&apikey=${apiKey}`;
 
