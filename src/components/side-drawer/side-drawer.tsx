@@ -19,7 +19,7 @@ export class SideDrawer {
   }
 
   @Method()
-  open() {
+  async open() {
     console.log('Open method');
     this.opened = true;
   }
