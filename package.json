@@ -1,6 +1,6 @@
 {
   "name": "web-components-playground-2023",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Just another playground of Stencil WC",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
