@@ -3,6 +3,7 @@ import { env } from '@alepop/stencil-env';
 
 export const config: Config = {
   namespace: 'web-components-playground',
+  preamble: 'Built by Vicccc',
   outputTargets: [
     {
       type: 'dist',

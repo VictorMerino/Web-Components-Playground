@@ -1,7 +1,7 @@
 {
-  "name": "web-components-playground",
+  "name": "web-components-playground-2023",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "Just another playground of Stencil WC",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "es2015": "dist/esm/index.js",
@@ -26,15 +26,15 @@
     "generate": "stencil generate"
   },
   "dependencies": {
-    "@stencil/core": "^4.7.0"
+    "@stencil/core": "^4.8.0"
   },
   "devDependencies": {
     "@alepop/stencil-env": "^0.4.1",
-    "@types/jest": "^29.5.6",
-    "@types/node": "^16.18.11",
+    "@types/jest": "^29.5.10",
+    "@types/node": "^20.10.2",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
-    "puppeteer": "21.1.1"
+    "puppeteer": "21.5.2"
   },
   "license": "MIT"
 }
