@@ -35,7 +35,8 @@ export class StockFinder {
     const quote = 'SYMBOL_SEARCH';
     const apiUrl = 'https://www.alphavantage.co/query';
     console.log(ALPHA_VANTAGE_API_KEY);
-    const apiKey = keywords === 'BA' ? 'demo' : 'demo'; // `${ALPHA_VANTAGE_API_KEY}`;
+    // const apiKey = keywords === 'BA' ? 'demo' : 'demo'; // `${ALPHA_VANTAGE_API_KEY}`;
+    const apiKey = ALPHA_VANTAGE_API_KEY; // `${ALPHA_VANTAGE_API_KEY}`;
     const fetchUri = `${apiUrl}?function=${quote}&keywords=${keywords}&apikey=${apiKey}`;
     try {
       const response = await fetch(fetchUri);
